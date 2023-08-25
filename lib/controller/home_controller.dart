@@ -45,6 +45,13 @@ class HomeController extends GetxController
     update();
   }
 
+  void onTapExpandableWidget(int index) {
+    if (!expandedList.contains(index)) {
+      expandedList.add(index);
+    }
+    update();
+  }
+
   String getStateName(int index) {
     return _data.entries.toList()[index].key;
   }

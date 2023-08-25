@@ -17,7 +17,12 @@ class SecondTab extends GetView<HomeController> {
     Map<String, dynamic> creationParams = controller.getData;
 
     return Platform.isIOS
-        ? Container()
+        ? UiKitView(
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            creationParams: creationParams,
+            creationParamsCodec: const StandardMessageCodec(),
+          )
         : PlatformViewLink(
             viewType: viewType,
             surfaceFactory: (context, controller) {

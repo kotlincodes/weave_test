@@ -41,54 +41,60 @@ class FirstTab extends GetView<HomeController> {
                       itemScrollController: controller.scrollController,
                       itemCount: controller.getData.length,
                       itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                controller.getStateName(index),
-                                style: TextStyle(
-                                    color: index == controller.selectedIndex
-                                        ? Colors.green
-                                        : Colors.black),
-                              ),
-                              ExpandablePanel(
-                                controller: ExpandableController(
-                                    initialExpanded:
-                                        controller.selectedIndex == index),
-                                collapsed: const SizedBox.shrink(),
-                                expanded: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: ListView.builder(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12),
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: controller
-                                              .getCityList(index)
-                                              .length,
-                                          itemBuilder:
-                                              (context, expandItemIndex) {
-                                            return Text(
-                                              controller.getCityList(
-                                                  index)[expandItemIndex],
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            );
-                                          }),
-                                    ),
-                                    // ExpandableButton(
-                                    //   child: Icon(Icons.arrow_upward),
-                                    // )
-                                  ],
+                        return GestureDetector(
+                          onTap: () => controller.onTapExpandableWidget(index),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.getStateName(index),
+                                  style: TextStyle(
+                                      color: index == controller.selectedIndex
+                                          ? Colors.green
+                                          : Colors.black),
                                 ),
-                              ),
-                              Divider()
-                            ],
+                                ExpandablePanel(
+                                  controller: ExpandableController(
+                                      initialExpanded:
+                                          controller.selectedIndex == index ||
+                                              controller.expandedList
+                                                  .contains(index)),
+                                  collapsed: const SizedBox.shrink(),
+                                  expanded: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: ListView.builder(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12),
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                .getCityList(index)
+                                                .length,
+                                            itemBuilder:
+                                                (context, expandItemIndex) {
+                                              return Text(
+                                                controller.getCityList(
+                                                    index)[expandItemIndex],
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              );
+                                            }),
+                                      ),
+                                      // ExpandableButton(
+                                      //   child: Icon(Icons.arrow_upward),
+                                      // )
+                                    ],
+                                  ),
+                                ),
+                                Divider()
+                              ],
+                            ),
                           ),
                         );
                       })),
