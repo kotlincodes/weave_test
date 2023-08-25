@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:weave_test/controller/home_controller.dart';
 import 'package:weave_test/screens/tabs/first_tab.dart';
+import 'package:weave_test/screens/tabs/second_tab.dart';
 import 'package:weave_test/widgets/tab_bar_item_widget.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -31,7 +32,7 @@ class HomeScreen extends GetView<HomeController> {
               controller: controller.tabController,
               children: [
                 FirstTab(),
-                Icon(Icons.directions_transit),
+                SecondTab(),
               ],
             ),
           ),
